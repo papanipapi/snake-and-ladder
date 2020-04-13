@@ -67,7 +67,7 @@ class _BoardTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($isComplete);
 
         $currentPlayer = $this->board->getPlayers()->current();
-        $currentPlayer->move($numberOfBlock);
+        $currentPlayer->skip($numberOfBlock);
 
         $isComplete = $this->board->isComplete();
         $this->assertTrue($isComplete);
@@ -100,7 +100,7 @@ class _BoardTest extends PHPUnit_Framework_TestCase
         $this->board->setSnakes($snakes);
 
         $currentPlayer = $this->board->getCurrentPlayer();
-        $currentPlayer->move($snakeBlock[0]);
+        $currentPlayer->skip($snakeBlock[0]);
 
         $this->assertTrue($this->board->isLandedOnSnakesHead());
     }
@@ -132,7 +132,7 @@ class _BoardTest extends PHPUnit_Framework_TestCase
         $this->board->setLadders($ladders);
 
         $currentPlayer = $this->board->getCurrentPlayer();
-        $currentPlayer->move($ladderBlock[1]);
+        $currentPlayer->skip($ladderBlock[1]);
 
         $this->assertTrue($this->board->isLandedOnLaddersEnd());
     }
@@ -173,7 +173,7 @@ class _BoardTest extends PHPUnit_Framework_TestCase
 
         $player->move($this->board->getExceedBlock());
 
-        $this->assertEquals(94, $this->board->getCurrentPlayerPosition());
+        $this->assertEquals(93, $this->board->getCurrentPlayerPosition());
     }
 
     protected function getMockPlayers()

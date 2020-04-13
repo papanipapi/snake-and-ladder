@@ -11,7 +11,7 @@ class Player
     protected $name;
 
     /** @var int */
-    protected $position;
+    protected $position = 1;
 
     /**
      * @return int
