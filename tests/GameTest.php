@@ -5,7 +5,7 @@ use Mini\Player;
 
 class GameTest extends PHPUnit_Framework_TestCase
 {
-    public function testConsistOfPlayer()
+    public function testPlayerShouldStartOnFirstBlock()
     {
         $game = new Game();
         $player1 = new Player();
