@@ -1,0 +1,16 @@
+{
+    "name": "mini/snake-and-ladder",
+    "description": "A very fun board game to play with.",
+    "authors": [
+        {
+            "name": "Aldrin Papa",
+            "email": "apapa@cambridge.org"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Mini\\": "src/"
+        }
+    }
+}

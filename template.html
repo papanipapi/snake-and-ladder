@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snake and Ladder</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <style type="text/css">
+        .even {
+            background-color: red;
+            color: white;
+        }
+
+        #message {
+            height: 250px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="board-game mt-4">
+        <div class="mb-4">
+            <table class="table table-borderless text-center">
+                <tbody>
+                    <tr><td class="odd">100</td><td class="even">99</td><td class="odd">98</td><td class="even">97</td><td class="odd">96</td><td class="even">95</td><td class="odd">94</td><td class="even">93</td><td class="odd">92</td><td class="even">91</td></tr>
+                    <tr><td class="even">81</td><td class="odd">82</td><td class="even">83</td><td class="odd">84</td><td class="even">85</td><td class="odd">86</td><td class="even">87</td><td class="odd">88</td><td class="even">89</td><td class="odd">90</td></tr>
+                    <tr><td class="odd">80</td><td class="even">79</td><td class="odd">78</td><td class="even">77</td><td class="odd">76</td><td class="even">75</td><td class="odd">74</td><td class="even">73</td><td class="odd">72</td><td class="even">71</td></tr>
+                    <tr><td class="even">61</td><td class="odd">62</td><td class="even">63</td><td class="odd">64</td><td class="even">65</td><td class="odd">66</td><td class="even">67</td><td class="odd">68</td><td class="even">69</td><td class="odd">70</td></tr>
+                    <tr><td class="odd">60</td><td class="even">59</td><td class="odd">58</td><td class="even">57</td><td class="odd">56</td><td class="even">55</td><td class="odd">54</td><td class="even">53</td><td class="odd">52</td><td class="even">51</td></tr>
+                    <tr><td class="even">41</td><td class="odd">42</td><td class="even">43</td><td class="odd">44</td><td class="even">45</td><td class="odd">46</td><td class="even">47</td><td class="odd">48</td><td class="even">49</td><td class="odd">50</td></tr>
+                    <tr><td class="odd">40</td><td class="even">39</td><td class="odd">38</td><td class="even">37</td><td class="odd">36</td><td class="even">35</td><td class="odd">34</td><td class="even">33</td><td class="odd">32</td><td class="even">31</td></tr>
+                    <tr><td class="even">21</td><td class="odd">22</td><td class="even">23</td><td class="odd">24</td><td class="even">25</td><td class="odd">26</td><td class="even">27</td><td class="odd">28</td><td class="even">29</td><td class="odd">30</td></tr>
+                    <tr><td class="odd">20</td><td class="even">19</td><td class="odd">18</td><td class="even">17</td><td class="odd">16</td><td class="even">15</td><td class="odd">14</td><td class="even">13</td><td class="odd">12</td><td class="even">11</td></tr>
+                    <tr><td class="even">1</td><td class="odd">2</td><td class="even">3</td><td class="odd">4</td><td class="even">5</td><td class="odd">6</td><td class="even">7</td><td class="odd">8</td><td class="even">9</td><td class="odd">10</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <form>
+                    <div class="form-group">
+                        <label for="players">Players</label>
+                        <div class="row">
+                            <div class="col-6">
+                                <select id="players" class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="start" class="btn btn-primary">Start</button>
+                        <button type="button" id="reset" class="btn btn-secondary" disabled>Reset</button>
+                    </div>
+                    <div class="form-group controls d-none">
+                        <button type="button" class="btn btn-info">Roll Dice</button>
+                        <div id="dice-result"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-6">
+                <ul id="message" class="list-unstyled"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+    let el = {
+        start: $("#start"),
+        reset: $("#reset"),
+        controls: $(".controls"),
+        message: $("#message"),
+    };
+
+    el.start.on("click", function(){
+        $(this).prop("disabled", true);
+        el.reset.prop("disabled", false);
+        el.controls.removeClass("d-none");
+
+        log("Initializing");
+    });
+
+    el.reset.on("click", function(){
+        $(this).prop("disabled", true);
+        el.start.prop("disabled", false);
+        el.controls.addClass("d-none");
+
+        log("Reset");
+    });
+
+    function log(message) {
+        let li = $("<li />").text(message);
+        el.message.append(li);
+    }
+});
+</script>
+</body>
+</html>
